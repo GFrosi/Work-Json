@@ -1,7 +1,5 @@
 import json
 import sys
-import argparse
-#from tqdm import tqdm
 
 
 def cell_type_dset(epi_js):
@@ -39,9 +37,7 @@ def main():
     path = sys.argv[2] # path to write the filtered json
     path_md5 = sys.argv[3] # path to write the list with the respectives md5sum
     epi_js = json.load(epi)
-    list_dset = []
     list_dset, list_md5 = cell_type_dset(epi_js)
-    #print(len(list_md5))
     write_json(path, list_dset)
     write_txt(path_md5, list_md5)
 
