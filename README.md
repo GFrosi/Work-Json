@@ -56,13 +56,16 @@ optional arguments:
 
 
 ```
-usage: filter_pval_json.py [-h] [-p PATH] [-d DSET] [-m MD5]
+usage: filter_track_type_json.py [-h] [-p PATH] [-t TRACK] [-d DSET] [-m MD5]
 
 A script to filter pval and input samples from a json file)
 
 optional arguments:
   -h, --help            show this help message and exit
   -p PATH, --path PATH  root path to the json file
+  -t TRACK, --track TRACK
+                        name of the track_type (pval, fc or raw). When pval,
+                        the filtered json will contains the ctl_raw datasets.
   -d DSET, --dset DSET  root path to write the new json file
   -m MD5, --md5 MD5     root path to write the md5 sum files in a txt file
 

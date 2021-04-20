@@ -1,9 +1,7 @@
 import json
 import sys
-
-
 import argparse
-import json 
+
 
 
 def open_json(file_n):
@@ -16,28 +14,42 @@ def open_json(file_n):
         #print hg['datasets'][0].keys()
 
 
-def get_pval_input(json_file):
+def get_track_type(json_file, track):
 
-    '''This function receives a json file and returns two lists'''
+    '''This function receives a json file and the track_type and returns two lists'''
     
     list_dset = []
     list_md5 = []
     
     for dset in json_file['datasets']:
 
-        try:
-            if 'pval' in dset['track_type']:
+        if 'pval' in track:
+        
+            try:
+                if 'pval' in dset['track_type']:
 
-                list_dset.append(dset)
-                list_md5.append(dset['md5sum'])
-            
-            if 'input' in dset['assay']:
+                    list_dset.append(dset)
+                    list_md5.append(dset['md5sum'])
+                
+                if 'input' in dset['assay']:
 
-                list_dset.append(dset)
-                list_md5.append(dset['md5sum'])
+                    list_dset.append(dset)
+                    list_md5.append(dset['md5sum'])
+                
+            except:
+                continue 
+
+        else:
             
-        except:
-            continue 
+            try:
+                if track in dset['track_type'] and 'input' not in dset['assay']: #to avoid ctl_raw when track = raw
+
+                    list_dset.append(dset)
+                    list_md5.append(dset['md5sum'])
+                
+            except:
+                continue 
+    
   
     return list_dset, list_md5
 
@@ -76,6 +88,10 @@ if __name__ == '__main__':
 
     parser.add_argument('-p', '--path', action="store",
                         help='root path to the json file'
+        )
+
+    parser.add_argument('-t', '--track', action="store",
+                        help='name of the track_type (pval, fc or raw). When pval, the filtered json will contains the ctl_raw datasets.'
         )
 
     parser.add_argument('-d', '--dset', action="store",
