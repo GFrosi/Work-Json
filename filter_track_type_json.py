@@ -5,18 +5,16 @@ import argparse
 
 
 def open_json(file_n):
-
-    '''load the json file to find the dataset names associated with each md5sum'''
+    '''load a json file'''
 
     with open(file_n) as f:
         hg = json.load(f) #just one key = datasets 
         return hg
-        #print hg['datasets'][0].keys()
-
+      
 
 def get_track_type(json_file, track):
-
-    '''This function receives a json file and the track_type and returns two lists'''
+    '''Receives a json file and the track_type.
+    Returns two lists'''
     
     list_dset = []
     list_md5 = []
@@ -55,7 +53,7 @@ def get_track_type(json_file, track):
 
 
 def write_json(path, list_dset):
-    """Write content to json path"""
+    '''Write content to json path'''
     with open(path, 'w') as f:
         json.dump({"datasets":list_dset}, f)
 

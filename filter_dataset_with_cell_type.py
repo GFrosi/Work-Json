@@ -3,6 +3,7 @@ import sys
 
 
 def cell_type_dset(epi_js):
+    
     list_dset = []
     list_md5 = []
     # ctn = 0
@@ -10,16 +11,16 @@ def cell_type_dset(epi_js):
 
         if 'cell_type' in dset:
             # ctn += 1
-
             list_dset.append(dset)
             list_md5.append(dset['md5sum'])
+    
     return list_dset, list_md5
 
 
-# test = cell_type_dset(epi_js)
 
 def write_json(path, list_dset):
-    """Write content to json path"""
+    '''Write content to json path'''
+    
     with open(path, 'w') as f:
         json.dump({"datasets":list_dset}, f)
 
